@@ -11,7 +11,6 @@ HackByte-3.0/
 ├───.gitignore
 │
 ├───[src/](https://github.com/Jyotibrat/For-Testing/tree/main/src/frontend/src)
-│   ├───main.jsx
 │   ├───index.css
 │   ├───App.jsx
 │   ├───App.css
