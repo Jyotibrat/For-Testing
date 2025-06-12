@@ -28,7 +28,7 @@ const ContactSection: React.FC = () => {
     setStatus({ loading: true, success: false, error: "" });
 
     try {
-      const response = await fetch("https://for-testing-q37lnm96v-bindupautra-jyotibrats-projects.vercel.app//api/contact", {
+      const response = await fetch("https://for-testing-q37lnm96v-bindupautra-jyotibrats-projects.vercel.app/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
