@@ -1,25 +1,24 @@
-const express = require('express');
-const cors = require('cors');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
 
-const app = express();
+export default async function handler(req, res) {
+  // Handle CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Create a transporter using SMTP
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
   }
-});
 
-// Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+  // Only allow POST method
+  if (req.method !== 'POST') {
+    return res.status(405).json({ 
+      success: false, 
+      message: 'Method not allowed' 
+    });
+  }
+
   try {
     const { name, email, subject, message } = req.body;
 
@@ -30,6 +29,15 @@ app.post('/api/contact', async (req, res) => {
         message: 'All fields are required' 
       });
     }
+
+    // Create transporter
+    const transporter = nodemailer.createTransporter({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
 
     // Email options
     const mailOptions = {
@@ -61,9 +69,4 @@ app.post('/api/contact', async (req, res) => {
       message: 'Failed to send message. Please try again later.' 
     });
   }
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-}); 
+}
