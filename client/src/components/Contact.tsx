@@ -28,6 +28,7 @@ const ContactSection: React.FC = () => {
     setStatus({ loading: true, success: false, error: "" });
 
     try {
+      // FIXED: Removed double slash from URL
       const response = await fetch("https://for-testing-q37lnm96v-bindupautra-jyotibrats-projects.vercel.app/api/contact", {
         method: "POST",
         headers: {
@@ -50,6 +51,10 @@ const ContactSection: React.FC = () => {
           subject: "",
           message: "",
         });
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setStatus(prev => ({ ...prev, success: false }));
+        }, 5000);
       } else {
         setStatus({
           loading: false,
@@ -58,6 +63,7 @@ const ContactSection: React.FC = () => {
         });
       }
     } catch (error) {
+      console.error('Contact form error:', error);
       setStatus({
         loading: false,
         success: false,
@@ -95,7 +101,6 @@ const ContactSection: React.FC = () => {
                     <p className="text-gray-600">jagadish.paul@yahoo.com</p>
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -181,7 +186,7 @@ const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={status.loading}
-                  className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2"
+                  className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status.loading ? (
                     "Sending..."
@@ -193,12 +198,14 @@ const ContactSection: React.FC = () => {
                   )}
                 </button>
                 {status.success && (
-                  <p className="text-green-600 text-center">
-                    Message sent successfully!
+                  <p className="text-green-600 text-center font-medium">
+                    ✅ Message sent successfully!
                   </p>
                 )}
                 {status.error && (
-                  <p className="text-red-600 text-center">{status.error}</p>
+                  <p className="text-red-600 text-center">
+                    ❌ {status.error}
+                  </p>
                 )}
               </div>
             </form>
