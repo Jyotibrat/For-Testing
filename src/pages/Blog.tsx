@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, ExternalLink, Search, BookOpen } from 'lucide-react';
+import axios from 'axios';
+import { Calendar, User, ExternalLink, Search, BookOpen, Loader2 } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -13,74 +14,37 @@ interface BlogPost {
 }
 
 const Blog: React.FC = () => {
+  const API_KEY = import.meta.env.VITE_BLOGGER_API_KEY; // Replace with your actual API key
+  const BLOG_ID = import.meta.env.VITE_BLOG_ID; // Replace with your actual Blog ID
+
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Mock blog data - in real app, this would fetch from Blogger API
   useEffect(() => {
-    const mockPosts: BlogPost[] = [
-      {
-        id: '1',
-        title: 'Getting Started with AI Tools Hub: A Complete Guide',
-        content: 'Learn how to make the most of our AI-powered tools for your daily workflow...',
-        published: '2024-01-15',
-        author: 'Alex Johnson',
-        url: 'https://aitoolshub.blogspot.com/2024/01/getting-started-guide.html',
-        excerpt: 'A comprehensive guide to using AI Tools Hub effectively, covering all seven tools and best practices for maximum productivity.'
-      },
-      {
-        id: '2',
-        title: 'The Future of AI-Powered Development Tools',
-        content: 'Exploring how AI is revolutionizing the way we write code and build applications...',
-        published: '2024-01-10',
-        author: 'Sarah Chen',
-        url: 'https://aitoolshub.blogspot.com/2024/01/future-ai-development.html',
-        excerpt: 'An in-depth look at how AI is transforming software development and what developers can expect in the coming years.'
-      },
-      {
-        id: '3',
-        title: 'AI Prompt Engineering: Best Practices and Tips',
-        content: 'Master the art of crafting effective prompts for better AI responses...',
-        published: '2024-01-05',
-        author: 'Michael Rodriguez',
-        url: 'https://aitoolshub.blogspot.com/2024/01/prompt-engineering-tips.html',
-        excerpt: 'Essential techniques for writing prompts that get you the best results from AI models, with practical examples and strategies.'
-      },
-      {
-        id: '4',
-        title: 'Code Review with AI: Transforming Quality Assurance',
-        content: 'How AI tools are changing the landscape of code review and quality control...',
-        published: '2024-01-01',
-        author: 'Emily Zhang',
-        url: 'https://aitoolshub.blogspot.com/2024/01/ai-code-review.html',
-        excerpt: 'Discover how AI-powered code analysis tools are helping developers write better, more secure code with automated insights.'
-      },
-      {
-        id: '5',
-        title: 'Building Multilingual Applications with AI Translation',
-        content: 'Leveraging AI translation tools for global software development...',
-        published: '2023-12-28',
-        author: 'David Park',
-        url: 'https://aitoolshub.blogspot.com/2023/12/multilingual-ai-translation.html',
-        excerpt: 'Learn how to integrate AI translation capabilities into your applications for seamless global user experiences.'
-      },
-      {
-        id: '6',
-        title: 'Sentiment Analysis in User Feedback: A Practical Guide',
-        content: 'Using AI to understand customer emotions and improve product development...',
-        published: '2023-12-25',
-        author: 'Lisa Wang',
-        url: 'https://aitoolshub.blogspot.com/2023/12/sentiment-analysis-guide.html',
-        excerpt: 'Practical applications of sentiment analysis for product managers and developers to better understand user feedback.'
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&fetchBodies=true`
+        );
+        const fetchedPosts: BlogPost[] = response.data.items.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          content: item.content,
+          published: item.published,
+          author: item.author.displayName,
+          url: item.url,
+          excerpt: item.content.substring(0, 200) + '...' // Simple excerpt creation
+        }));
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      } finally {
+        setLoading(false);
       }
-    ];
+    };
 
-    // Simulate API call
-    setTimeout(() => {
-      setPosts(mockPosts);
-      setLoading(false);
-    }, 1000);
+    fetchPosts();
   }, []);
 
   const filteredPosts = posts.filter(post =>
@@ -139,7 +103,9 @@ const Blog: React.FC = () => {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
+            <span className="ml-4 text-xl text-gray-400">Loading posts...</span>
+
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

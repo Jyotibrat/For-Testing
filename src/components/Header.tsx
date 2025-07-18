@@ -1,8 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import { useAuth } from '../contexts/AuthContext';
+
+// Create a motion-wrapped Link component
+const MotionLink = motion(Link);
 
 const Header: React.FC = () => {
   const { user } = useAuth();
@@ -16,7 +20,8 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div
+          <MotionLink
+            to="/"
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-3"
           >
@@ -27,8 +32,8 @@ const Header: React.FC = () => {
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               AI Tools Hub
             </h1>
-          </motion.div>
-          
+          </MotionLink>
+
           <div className="flex items-center space-x-6">
             {user && (
               <UserMenu />

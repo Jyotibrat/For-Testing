@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, GitBranch, Users, Star, ExternalLink } from 'lucide-react';
+import { Code, GitBranch, Star, ExternalLink } from 'lucide-react';
 
 const Contribute: React.FC = () => {
   const techStack = [
@@ -13,33 +13,13 @@ const Contribute: React.FC = () => {
     { name: 'Gemini API', description: 'AI processing' }
   ];
 
-  const contributors = [
-    {
-      name: 'Alex Johnson',
-      role: 'Lead Developer',
-      contributions: 'Core architecture, AI integration',
-      avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'
-    },
-    {
-      name: 'Sarah Chen',
-      role: 'UI/UX Designer',
-      contributions: 'Design system, user experience',
-      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'
-    },
-    {
-      name: 'Michael Rodriguez',
-      role: 'Backend Developer',
-      contributions: 'API development, infrastructure',
-      avatar: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'
-    },
-    {
-      name: 'Emily Zhang',
-      role: 'DevOps Engineer',
-      contributions: 'Deployment, monitoring',
-      avatar: 'https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'
-    }
-  ];
-
+  const featuredContributor = {
+    name: 'Bindupautra Jyotibrat',
+    subheading: 'Project Creator',
+    linkedin: 'https://www.linkedin.com/in/bindupautra-jyotibrat',
+    github: 'https://github.com/Jyotibrat',
+    twitter: 'https://x.com/B_Jyotibrat'
+  };
   const guidelines = [
     {
       title: 'Code Standards',
@@ -112,7 +92,7 @@ const Contribute: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <a
-                  href="https://github.com/ai-tools-hub/ai-tools-hub"
+                  href="https://github.com/Jyotibrat"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center px-6 py-3 bg-gray-900 rounded-lg hover:bg-gray-700 transition-colors duration-300"
@@ -122,7 +102,7 @@ const Contribute: React.FC = () => {
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </a>
                 <a
-                  href="https://github.com/ai-tools-hub/ai-tools-hub/issues"
+                  href="https://github.com/Jyotibrat/AI-Flow/issues"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-300"
@@ -195,35 +175,26 @@ const Contribute: React.FC = () => {
         <motion.section
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8 }} className="text-center"
         >
-          <h2 className="text-3xl font-bold mb-8 flex items-center">
-            <Users className="w-8 h-8 mr-3 text-purple-500" />
-            Our Contributors
+          <h2 className="text-3xl font-bold mb-8 text-center">
+            Featured Contributor
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {contributors.map((contributor, index) => (
-              <motion.div
-                key={index}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
-                className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition-colors duration-300"
-              >
-                <div className="flex items-center space-x-4">
-                  <img
-                    src={contributor.avatar}
-                    alt={contributor.name}
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
-                  <div>
-                    <h3 className="text-xl font-semibold">{contributor.name}</h3>
-                    <p className="text-purple-400">{contributor.role}</p>
-                    <p className="text-gray-400 text-sm mt-1">{contributor.contributions}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="flex justify-center">
+          <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.5 }}
+              className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition-colors duration-300 text-center max-w-sm"
+            >
+              <h3 className="text-xl font-semibold mb-2">{featuredContributor.name}</h3>
+              <p className="text-purple-400 mb-4">{featuredContributor.subheading}</p>
+              <div className="flex justify-center space-x-4">
+                <a href={featuredContributor.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">LinkedIn</a>
+                <a href={featuredContributor.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:underline">GitHub</a>
+                <a href={featuredContributor.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:underline">Twitter</a>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
       </div>

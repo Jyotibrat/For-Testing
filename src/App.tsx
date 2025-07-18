@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { AuthProvider } from './contexts/AuthContext';
 import LoadingScreen from './components/LoadingScreen';
@@ -14,11 +14,26 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import AITools from './pages/AITools';
 import Chatbot from './components/Chatbot';
+import { initGA, trackPageView } from './utils/analytics';
+
+// Create a separate component for analytics tracking
+const AnalyticsTracker: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
+  return null;
+};
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Initialize Google Analytics
+    initGA();
+
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -34,6 +49,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <AnalyticsTracker />
         <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
           <AnimatePresence mode="wait">
             <Layout>

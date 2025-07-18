@@ -16,19 +16,19 @@ const Contact: React.FC = () => {
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://linkedin.com/in/ai-tools-admin',
+      url: 'https://www.linkedin.com/in/bindupautra-jyotibrat',
       color: 'from-blue-600 to-blue-800'
     },
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/ai-tools-admin',
+      url: 'https://github.com/Jyotibrat',
       color: 'from-gray-600 to-gray-800'
     },
     {
       name: 'Twitter',
       icon: Twitter,
-      url: 'https://twitter.com/ai-tools-admin',
+      url: 'https://x.com/B_Jyotibrat',
       color: 'from-blue-400 to-blue-600'
     }
   ];
@@ -266,7 +266,7 @@ const Contact: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Mail className="w-5 h-5 text-blue-500" />
-                  <span className="text-gray-300">admin@aitoolshub.com</span>
+                  <span className="text-gray-300">bjyotibrat@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <MessageSquare className="w-5 h-5 text-purple-500" />
@@ -275,24 +275,6 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* FAQ Quick Links */}
-            <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700">
-              <h3 className="text-xl font-semibold mb-4">Common Questions</h3>
-              <div className="space-y-3">
-                <div className="text-gray-300">
-                  <p className="font-medium">How do I use the AI tools?</p>
-                  <p className="text-sm text-gray-400">Check our Examples page for detailed usage guides</p>
-                </div>
-                <div className="text-gray-300">
-                  <p className="font-medium">Can I contribute to the project?</p>
-                  <p className="text-sm text-gray-400">Yes! Visit our Contribute page to get started</p>
-                </div>
-                <div className="text-gray-300">
-                  <p className="font-medium">Is the service free?</p>
-                  <p className="text-sm text-gray-400">Yes, all our AI tools are completely free to use</p>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

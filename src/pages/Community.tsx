@@ -7,26 +7,26 @@ const Community: React.FC = () => {
     {
       name: 'Twitter',
       icon: Twitter,
-      url: 'https://twitter.com/ai-tools-hub',
+      url: 'https://x.com/B_Jyotibrat',
       description: 'Follow us for updates, tips, and AI tool announcements',
-      followers: '12.5K',
+      followers: '7',
       color: 'from-blue-400 to-blue-600'
     },
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/ai-tools-hub',
+      url: 'https://github.com/Jyotibrat/AI-Flow',
       description: 'Contribute to our open-source projects and report issues',
-      followers: '8.2K',
-      color: 'from-gray-400 to-gray-600'
+      followers: '27',
+      color: 'from-blue-400 to-blue-600'
     }
   ];
 
   const communityStats = [
-    { icon: Users, label: 'Community Members', value: '25,000+' },
-    { icon: MessageSquare, label: 'Monthly Discussions', value: '500+' },
-    { icon: Star, label: 'GitHub Stars', value: '8.2K' },
-    { icon: GitFork, label: 'Project Forks', value: '1.2K' }
+    { icon: Users, label: 'Community Members', value: '1' },
+    { icon: MessageSquare, label: 'Monthly Discussions', value: '10' },
+    { icon: Star, label: 'GitHub Stars', value: '7' },
+    { icon: GitFork, label: 'Project Forks', value: '0' }
   ];
 
   const communityBenefits = [
@@ -182,7 +182,7 @@ const Community: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://twitter.com/ai-tools-hub"
+                href="https://x.com/B_Jyotibrat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-blue-600 rounded-full font-semibold text-white hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2"
@@ -191,7 +191,7 @@ const Community: React.FC = () => {
                 <span>Follow on Twitter</span>
               </a>
               <a
-                href="https://github.com/ai-tools-hub"
+                href="https://github.com/Jyotibrat/AI-Flow"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-gray-700 rounded-full font-semibold text-white hover:bg-gray-600 transition-colors duration-300 flex items-center justify-center space-x-2"

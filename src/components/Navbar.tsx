@@ -15,14 +15,14 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { path: '/', icon: Home, label: 'Home' },
-  { path: '/about', icon: Info, label: 'About' },
-  { path: '/examples', icon: FileText, label: 'Examples' },
-  { path: '/contribute', icon: Users, label: 'Contribute' },
-  { path: '/community', icon: MessageCircle, label: 'Community' },
-  { path: '/contact', icon: Mail, label: 'Contact' },
-  { path: '/blog', icon: BookOpen, label: 'Blog' },
-  { path: '/ai-tools', icon: Brain, label: 'AI Tools' },
+  { path: '/', icon: Home, label: 'Home' }, // Home
+  { path: '/about', icon: Info, label: 'About' }, // About
+  { path: '/examples', icon: FileText, label: 'Examples' }, // Examples
+  { path: '/ai-tools', icon: Brain, label: 'AI Tools' }, // AI Tools
+  { path: '/blog', icon: BookOpen, label: 'Blog' }, // Blog
+  { path: '/community', icon: MessageCircle, label: 'Community' }, // Community
+  { path: '/contribute', icon: Users, label: 'Contribute' }, // Contribute
+  { path: '/contact', icon: Mail, label: 'Contact' }, // Contact
 ];
 
 const Navbar: React.FC = () => {
