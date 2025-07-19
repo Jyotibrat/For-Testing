@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { Calendar, User, ExternalLink, Search, BookOpen, Loader2 } from 'lucide-react';
+import { Calendar, User, ExternalLink, Search, Loader2 } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -117,18 +117,10 @@ const Blog: React.FC = () => {
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.8 }}
                 className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 transform hover:scale-105"
               >
-                <div className="flex items-center space-x-2 mb-4">
-                  <BookOpen className="w-5 h-5 text-blue-500" />
-                  <span className="text-sm text-gray-400">Article</span>
-                </div>
                 
                 <h2 className="text-xl font-semibold mb-3 text-white line-clamp-2">
                   {post.title}
                 </h2>
-                
-                <p className="text-gray-400 mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
                 
                 <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">

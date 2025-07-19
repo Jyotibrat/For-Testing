@@ -47,12 +47,20 @@ const Contact: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      // Mock email sending - in real app, this would call your email service
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log('Email sent:', formData);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmitStatus('error');
