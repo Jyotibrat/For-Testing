@@ -1,3 +1,4 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "API": "AIzaSyCppadu4Z_UgZ2ru1aY48nSBZt05_hMOBs"
 }
