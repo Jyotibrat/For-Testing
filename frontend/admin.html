@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>OpsMind AI — Admin</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <!-- ── Sidebar ──────────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">🧠</div>
+                    <div class="brand-name">OpsMind AI</div>
+                </div>
+                <div class="brand-version">v1.0 · Admin Panel</div>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-row">
+                    <div class="user-avatar" id="sidebar-avatar">A</div>
+                    <div class="user-meta">
+                        <div class="user-name" id="sidebar-username">Loading…</div>
+                        <div class="role-badge admin" id="sidebar-role">⭐ Admin</div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-group-label">Navigation</div>
+                <div class="nav-item" onclick="window.location.href='/app/chat.html'">
+                    <span class="ni">💬</span> Chat
+                </div>
+                <div class="nav-item active">
+                    <span class="ni">📂</span> Document Management
+                </div>
+
+                <div class="nav-group-label">Admin</div>
+                <div class="nav-item" onclick="loadStats()">
+                    <span class="ni">📊</span> Refresh Stats
+                </div>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="logout-btn" id="logout-btn">
+                    <span>🚪</span> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- ── Main ─────────────────────────────────────────────────── -->
+        <div class="main">
+            <div class="page-header">
+                <div class="page-header-left">
+                    <div class="page-header-title">Document Management</div>
+                    <div class="page-header-sub">Upload, manage, and monitor the knowledge base</div>
+                </div>
+                <div class="online-pill">
+                    <div class="pulse"></div>Admin
+                </div>
+            </div>
+
+            <div class="admin-body">
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-value" id="stat-docs">—</div>
+                        <div class="stat-label">Documents</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🧩</div>
+                        <div class="stat-value" id="stat-chunks">—</div>
+                        <div class="stat-label">Chunks Indexed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <div class="stat-value" id="stat-queries">—</div>
+                        <div class="stat-label">Queries (24h)</div>
+                    </div>
+                </div>
+
+                <!-- Upload -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-title">Upload Documents</div>
+                            <div class="section-sub">PDF files only · existing documents will be re-indexed</div>
+                        </div>
+                    </div>
+
+                    <div style="padding:20px; display:flex; flex-direction:column; gap:14px;">
+                        <div class="upload-zone" id="upload-zone">
+                            <input type="file" id="file-input" accept=".pdf" multiple />
+                            <div class="upload-icon">📥</div>
+                            <div class="upload-title">Drop PDF files here</div>
+                            <div class="upload-sub">or click to browse</div>
+                        </div>
+
+                        <div id="upload-progress"
+                            style="display:none; align-items:center; gap:14px; padding:14px 20px; background:rgba(91,141,248,.06); border:1px solid var(--border-mid); border-radius:var(--r-sm);">
+                            <span id="upload-progress-label"
+                                style="font-size:.82rem;white-space:nowrap;">Uploading…</span>
+                            <div class="prog-bar">
+                                <div class="prog-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents table -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div>
+                            <div class="section-title">Knowledge Base</div>
+                            <div class="section-sub" id="doc-count-label">Loading…</div>
+                        </div>
+                        <button class="btn btn-ghost" onclick="loadDocuments()">↻ Refresh</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Document</th>
+                                    <th>Chunks</th>
+                                    <th>Uploaded</th>
+                                    <th style="text-align:right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="doc-tbody">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="empty-state">
+                                            <div class="empty-state-icon">⏳</div>Loading documents…
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
